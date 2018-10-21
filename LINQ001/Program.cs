@@ -79,6 +79,9 @@ public class Program
         var grp1 = lstPrd.ToLookup(p => p.Category);
         var grp2 = lstPrd.ToLookup(p => p.Category, p => p.Name);
         var grp3 = lstPrd.ToLookup(p => p.Category, p => new { p.Name, p.Price});
+
+        var grp4 = lstPrd.Where(p => p.Category != "Kitcheware").Select(p => new { p.Name, p.Price, p.Category }).GroupBy(p => p.Category);
+
     }
 
 
