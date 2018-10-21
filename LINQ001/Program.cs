@@ -90,9 +90,8 @@ public class Program
                 Console.WriteLine("Name: " + t.Name + "    Price: " + t.Price);
             }
             Console.WriteLine();
-
         }
-
+        Console.WriteLine("\n\nDone.");
     }
 
 
