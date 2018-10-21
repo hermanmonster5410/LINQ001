@@ -82,6 +82,17 @@ public class Program
 
         var grp4 = lstPrd.Where(p => p.Category != "Kitcheware").Select(p => new { p.Name, p.Price, p.Category }).GroupBy(p => p.Category);
 
+        foreach ( var g in grp4 )
+        {
+            Console.WriteLine("Key: " + g.Key + "  Count: " + g.Count());
+            foreach ( var t in g )
+            {
+                Console.WriteLine("Name: " + t.Name + "    Price: " + t.Price);
+            }
+            Console.WriteLine();
+
+        }
+
     }
 
 
