@@ -87,11 +87,22 @@ public class Program
             Console.WriteLine("Key: " + g.Key + "  Count: " + g.Count());
             foreach ( var t in g )
             {
-                Console.WriteLine("Name: " + t.Name + "    Price: " + t.Price);
+//              Console.WriteLine("Name: " + t.Name + "    Price: " + t.Price);
+                Console.WriteLine($"Name:  {t.Name,-30}   Price:  {t.Price,8:N4}");
             }
             Console.WriteLine();
         }
         Console.WriteLine("\n\nDone.");
+
+        string name = "Mark";
+        var date = DateTime.Now;
+
+        // Composite formatting:
+        Console.WriteLine("Hello, {0}! Today is {1}, it's {2:HH:mm} now.", name, date.DayOfWeek, date);
+        // String interpolation:
+        Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
+
+
     }
 
 
