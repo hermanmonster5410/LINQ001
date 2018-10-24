@@ -23,15 +23,15 @@ namespace SubsetSum
             if (ar0.Length != ar.Length)
                 return true;
 
-            if (ar0.Length == 2 && ar0[0] + ar0[1] == s)
+            if ( (ar0.Length == 2) && (ar0[0] + ar0[1] == s) )
                 return true;
 
             for ( int i = 0; i < ar0.Length; i++ )
             {
                 int[] w = new int[ar0.Length - 1];
                 int cur = 0;
-                int s0=0;
-                for ( int j = 0; j < w.Length; j++)
+                int s0 = 0;
+                for ( int j = 0; j < ar0.Length; j++)
                 {
                     if (j == i)
                         s0 = s - ar0[j];
