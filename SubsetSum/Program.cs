@@ -8,7 +8,7 @@ namespace SubsetSum
 {
     class Program
     {
-        int[] m = new int[] { 1, 3, 5, 10, 20, 8, 14 };
+        static int[] m = new int[] { 1, 3, 5, 10, 20, 8, 14 };
 
         static void Main(string[] args)
         {
