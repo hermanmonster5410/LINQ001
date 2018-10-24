@@ -8,11 +8,11 @@ namespace SubsetSum
 {
     class Program
     {
-        static int[] m = new int[] { 1, 3, 5, 10, 20, 8, 14 };
+        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16 };
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Result: " + IsSubsetSum(m, 28));
+            Console.WriteLine("Result: " + IsSubsetSum(m, 0));
             Console.WriteLine("Done");
         }
 
@@ -20,8 +20,11 @@ namespace SubsetSum
         public static bool IsSubsetSum(int[] ar, int s)
         {
             int[] ar0 = ar.Where(a => a != s).ToArray();
-            if (ar0.Length != ar.Length)
+            if (ar0.Length != ar.Length)                   // <== breakpoint
                 return true;
+
+            if (ar.Length < 2)
+                return false;
 
             if ( (ar0.Length == 2) && (ar0[0] + ar0[1] == s) )
                 return true;
@@ -41,7 +44,7 @@ namespace SubsetSum
                     }
                 }
 
-                if (IsSubsetSum(w, s0) == true)
+                if (IsSubsetSum(w, s0) == true)     // <== breakpoint
                     return true;
             }
 
