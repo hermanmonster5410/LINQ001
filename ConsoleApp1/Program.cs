@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SubsetSumDyn
 {
-    // A Dynamic Programming solution for subset sum problem 
+// A Dynamic Programming solution for subset sum problem 
+
+//  https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
 
     class GFG
     {
@@ -27,7 +29,7 @@ namespace SubsetSumDyn
             for (int i = 1; i <= sum; i++)
                 subset[i, 0] = false;
 
-            // Fill the subset table in botton up manner 
+            // Fill the subset table in bottom up manner 
             for (int i = 1; i <= sum; i++)
             {
                 for (int j = 1; j <= n; j++)
@@ -46,10 +48,12 @@ namespace SubsetSumDyn
         public static void Main()
         {
             int[] set = { 3, 34, 4, 12, 5, 2 };
-            int sum = 9;
+            int sum = 90;
             int n = set.Length;
 
-            if (isSubsetSum(set, n, sum) == true)
+            bool retVal = isSubsetSum(set, n, sum);
+
+            if ( retVal)
                 Console.WriteLine("Found a subset with given sum");
             else
                 Console.WriteLine("No subset with given sum");
