@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace SubsetSum
 {
@@ -12,7 +14,19 @@ namespace SubsetSum
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Result: " + IsSubsetSum(m, 0));
+            Stopwatch stpWt = new Stopwatch();
+
+            stpWt.Start();
+            Console.WriteLine("Naive: " + IsSubsetSum(m, 90));
+            stpWt.Stop();
+            Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds * 1000.0,16:N12}" );
+
+            stpWt.Start();
+            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 90));
+            stpWt.Stop();
+            Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds * 1000.0,16:N12}");
+
+
             Console.WriteLine("Done");
         }
 
@@ -51,10 +65,34 @@ namespace SubsetSum
             return false;
         }
 
-        public static bool IsSubsetSumX(int[] ar, int s)
-        {
 
-            return false;
+        public static bool IsSubsetSumDyn(int[] set, int n, int sum)
+        {
+ // The value of subset[i][j] will be true if there is a subset of set[0..j-1] with sum equal to i 
+
+            bool[,] subset = new bool[sum + 1, n + 1];
+
+// If sum is 0, then answer is true 
+            for (int i = 0; i <= n; i++)
+                subset[0, i] = true;
+
+// If sum is not 0 and set is empty, then answer is false 
+            for (int i = 1; i <= sum; i++)
+                subset[i, 0] = false;
+
+// Fill the subset table in bottom up manner 
+            for (int i = 1; i <= sum; i++)
+            {
+                for (int j = 1; j <= n; j++)
+                {
+                    subset[i, j] = subset[i, j - 1];
+                    if (i >= set[j - 1])
+                        subset[i, j] = subset[i, j] ||
+                                       subset[i - set[j - 1], j - 1];
+                }
+            }
+
+            return subset[sum, n];
         }
     }
 }
