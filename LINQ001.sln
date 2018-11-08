@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubsetSum", "SubsetSum\Subs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubsetSumDyn", "ConsoleApp1\SubsetSumDyn.csproj", "{1B732FD6-17C7-4E6C-91D3-A369C1E896FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC1", "MVC1\MVC1.csproj", "{77BBCCFB-ACE1-4629-AF99-FCA987C97853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializers", "Serializers\Serializers.csproj", "{F04E5F17-CDEB-4724-98E7-3FB3A7C6CF5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{1B732FD6-17C7-4E6C-91D3-A369C1E896FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B732FD6-17C7-4E6C-91D3-A369C1E896FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B732FD6-17C7-4E6C-91D3-A369C1E896FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77BBCCFB-ACE1-4629-AF99-FCA987C97853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77BBCCFB-ACE1-4629-AF99-FCA987C97853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77BBCCFB-ACE1-4629-AF99-FCA987C97853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77BBCCFB-ACE1-4629-AF99-FCA987C97853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F04E5F17-CDEB-4724-98E7-3FB3A7C6CF5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04E5F17-CDEB-4724-98E7-3FB3A7C6CF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04E5F17-CDEB-4724-98E7-3FB3A7C6CF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04E5F17-CDEB-4724-98E7-3FB3A7C6CF5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

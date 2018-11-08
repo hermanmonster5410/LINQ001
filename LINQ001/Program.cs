@@ -7,6 +7,8 @@ public class Program
 {
     public static void Main()
     {
+
+        var 
         string[] s1;
         int[]    i1;
 
