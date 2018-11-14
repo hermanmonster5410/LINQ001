@@ -7,8 +7,25 @@ public class Program
 {
     public static void Main()
     {
+ // Problem #1.
 
-        var 
+        var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8};
+
+        var grpInt = lstInt.GroupBy(x => x);
+
+        var grpInt2 = grpInt.Select(x => new { value = x.Key, count = x.Count() }).OrderByDescending(x => x.count).ThenByDescending(x => x.value);
+
+        foreach (var m in grpInt2)
+            Console.WriteLine(m.value + "   " + m.count);
+
+
+        // Problem # 2. 
+
+        List<string> lstStr1 = new List<string> { "Henry", "debate", "night", "nonstuff", "trident", "moon", "mySTUFF", "StUfF" };
+
+        RemoveStuff(lstStr1);
+
+
         string[] s1;
         int[]    i1;
 
@@ -119,6 +136,13 @@ public class Program
             Console.Write(z.ToString() + ", ");
 
         Console.WriteLine("\n");
+    }
+
+    public static void RemoveStuff(List<string> lst)
+    {
+//        string[] s = lst.ToArray();
+        lst.RemoveAll(x => x.ToUpper().Contains("STUFF"));
+
     }
 
 
