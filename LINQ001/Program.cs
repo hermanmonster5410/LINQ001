@@ -11,6 +11,7 @@ public class Program
 
         var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8};
 
+
         var grpInt = lstInt.GroupBy(x => x);
 
         var grpInt2 = grpInt.Select(x => new { value = x.Key, count = x.Count() }).OrderByDescending(x => x.count).ThenByDescending(x => x.value);
@@ -18,6 +19,39 @@ public class Program
         foreach (var m in grpInt2)
             Console.WriteLine(m.value + "   " + m.count);
 
+        int[] socks = { 1, 1, 3, 1, 2, 1, 3, 3, 3, 3 };
+
+        int sq = socks.GroupBy(x => x).Select(x => new { key = x.Key, value = x.Count() }).Sum(x => x.value / 2);
+
+        Dictionary<int, int> dict01 = new Dictionary<int, int>();
+        int curVal;
+        for (int n=0; n<socks.Length; n++ )
+        {
+            if ( !dict01.ContainsKey(socks[n]) )
+            {
+                dict01.Add(socks[n], 1);
+            }
+            else
+            {
+                curVal = dict01[socks[n]];
+                dict01[socks[n]] = ++curVal;
+            }
+        }
+
+        int sum = 0;
+        foreach (int k in dict01.Values)
+            sum += k / 2;
+
+        Console.WriteLine("Good pair of socks: " + sum);
+
+        string str02 = "hsgdfjgkh";
+        char[] route = str02.ToCharArray();
+        char prev = 'X';
+        
+        foreach (char cval in route)
+        {
+
+        }
 
         // Problem # 2. 
 
