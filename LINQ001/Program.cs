@@ -7,7 +7,20 @@ public class Program
 {
     public static void Main()
     {
- // Problem #1.
+        //  Problem #1: Hiders vs Overriders
+
+        Stock st1 = new Stock("General Electric");
+        Asset as1 = st1;
+        Stock st2 = (Stock) as1;
+
+        as1.Display();
+        as1.NameLen();
+
+        st2.Display();
+        st2.NameLen();
+
+
+ // Problem #2.
 
         var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8};
 
@@ -46,14 +59,14 @@ public class Program
 
         string str02 = "hsgdfjgkh";
         char[] route = str02.ToCharArray();
-        char prev = 'X';
+//      char prev = 'X';
         
         foreach (char cval in route)
         {
 
         }
 
-        // Problem # 2. 
+// Problem # 3. 
 
         List<string> lstStr1 = new List<string> { "Henry", "debate", "night", "nonstuff", "trident", "moon", "mySTUFF", "StUfF" };
 
@@ -186,6 +199,60 @@ public class Program
         public string Name;
         public string Category;
         public decimal Price;
+    }
+
+    public class Asset
+    {
+        private string name;
+
+        public string Name { get; set; }
+
+        public Asset()  { }
+
+        public Asset (string name)
+        {
+            this.name = name;
+        }
+
+        public virtual void Display()
+        {
+            Console.WriteLine(" Asset: name=" + name);
+        }
+
+        public virtual void NameLen()
+        {
+            Console.WriteLine("Asset: name length=" + this.name.Length);
+        }
+
+    }
+
+    public class Stock  : Asset
+    {
+        private decimal price;
+
+        public decimal Price { get; set; }
+
+        public Stock(string name) : base(name)
+        {
+
+        }
+
+        public Stock(string name, decimal price) : this(name)
+        {
+            this.price = price;
+        }
+
+        public Stock(decimal price) => this.price = price;
+
+        public override void Display()
+        {
+            Console.WriteLine("Stock: name=" + Name + "   price=" + price);
+        }
+
+        public new void NameLen()
+        {
+            Console.WriteLine("Stock: name length= " + this.Name.Length);
+        }
     }
 
 }
