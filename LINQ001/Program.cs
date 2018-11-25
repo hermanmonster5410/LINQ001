@@ -9,7 +9,7 @@ public class Program
     {
         //  Problem #1: Hiders vs Overriders
 
-        Stock st1 = new Stock("General Electric");
+        Stock st1 = new Stock("General Electric", 135.00m);
         Asset as1 = st1;
         Stock st2 = (Stock) as1;
 
@@ -19,8 +19,19 @@ public class Program
         st2.Display();
         st2.NameLen();
 
+        //  Problem # 1-1: indexers
 
- // Problem #2.
+        Sentence snt = new Sentence("To be    or not to be, this is the question");
+        for (int i = 0; i < snt.Length; i++)
+            Console.WriteLine(snt[i]);
+
+        snt[2] = "index2";
+        snt[5] = "index5";
+
+        for (int i = 0; i < snt.Length; i++)
+            Console.WriteLine(snt[i]);
+
+        // Problem #2.
 
         var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8};
 
@@ -205,7 +216,11 @@ public class Program
     {
         private string name;
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
         public Asset()  { }
 
@@ -230,7 +245,11 @@ public class Program
     {
         private decimal price;
 
-        public decimal Price { get; set; }
+        public decimal Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
 
         public Stock(string name) : base(name)
         {
@@ -246,13 +265,36 @@ public class Program
 
         public override void Display()
         {
-            Console.WriteLine("Stock: name=" + Name + "   price=" + price);
+            Console.WriteLine("Stock (ovr): name=" + Name + "   price=" + price);
         }
 
         public new void NameLen()
         {
-            Console.WriteLine("Stock: name length= " + this.Name.Length);
+            Console.WriteLine("Stock (new): name length= " + Name.Length);
         }
+    }
+
+    public class Sentence   // indexer
+    {
+        string text;
+        string[] words;
+
+        public Sentence() { }
+
+        public Sentence(string s)
+        {
+            words = s.Split();
+            text = s;
+        }
+
+        public string this [int wn]
+        {
+            get {return words[wn]; }
+            set { words[wn] = value; }
+        }
+
+        public int Length
+        {  get { return words.Length; } }
     }
 
 }
