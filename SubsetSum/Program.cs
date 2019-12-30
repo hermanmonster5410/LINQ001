@@ -10,27 +10,27 @@ namespace SubsetSum
 {
     class Program
     {
-        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16, 4, 8, 31, 40, 32, 7, 2, 9, 38, 33, 17, 102, 45 };
+        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16, 4, 8, 31, 40, 32, 7, 2, 9, 38, 33, 17 };
 
         static void Main(string[] args)
         {
             Stopwatch stpWt = new Stopwatch();
-
             stpWt.Start();
-            Console.WriteLine("Naive: " + IsSubsetSumMyNaive(m, 89));
+            Console.WriteLine("Naive: " + IsSubsetSum(m, 100));
             stpWt.Stop();
-            Console.WriteLine($"Elapsed:   {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}" );
+            Console.WriteLine($"Elapsed ms:   {stpWt.ElapsedMilliseconds}" );
 
-            stpWt.Start();
-            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 89));
-            stpWt.Stop();
-            Console.WriteLine($"Elapsed:   {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}");
+            Stopwatch stpWt2 = new Stopwatch();
+            stpWt2.Start();
+            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 100));
+            stpWt2.Stop();
+            Console.WriteLine($"Elapsed ms:   {stpWt2.ElapsedMilliseconds}");
 
             Console.WriteLine("Done");
         }
 
 
-        public static bool IsSubsetSumMyNaive(int[] ar, int s)
+        public static bool IsSubsetSum(int[] ar, int s)
         {
             int[] ar0 = ar.Where(a => a != s).ToArray();
             if (ar0.Length != ar.Length)                   // <== breakpoint
@@ -42,22 +42,19 @@ namespace SubsetSum
             if ( (ar0.Length == 2) && (ar0[0] + ar0[1] == s) )
                 return true;
 
+            int[] w = new int[ar0.Length - 1];
+
             for ( int i = 0; i < ar0.Length; i++ )
             {
-                int[] w = new int[ar0.Length - 1];
                 int cur = 0;
-                int s0 = 0;
+                int s0 = s - ar0[i];
                 for ( int j = 0; j < ar0.Length; j++)
                 {
-                    if (j == i)
-                        s0 = s - ar0[j];
-                    else
-                    {
+                    if (i != j)
                         w[cur++] = ar0[j];
-                    }
                 }
 
-                if (IsSubsetSumMyNaive(w, s0) == true)     // <== breakpoint
+                if (IsSubsetSum(w, s0) == true)     // <== breakpoint
                     return true;
             }
 
