@@ -17,7 +17,7 @@ namespace SubsetSum
             Stopwatch stpWt = new Stopwatch();
 
             stpWt.Start();
-            Console.WriteLine("Naive: " + IsSubsetSum(m, 51));
+            Console.WriteLine("Naive: " + IsSubsetSumMyNaive(m, 90));
             stpWt.Stop();
             Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}" );
 
@@ -31,7 +31,7 @@ namespace SubsetSum
         }
 
 
-        public static bool IsSubsetSum(int[] ar, int s)
+        public static bool IsSubsetSumMyNaive(int[] ar, int s)
         {
             int[] ar0 = ar.Where(a => a != s).ToArray();
             if (ar0.Length != ar.Length)                   // <== breakpoint
@@ -65,6 +65,8 @@ namespace SubsetSum
             return false;
         }
 
+
+//  https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
 
         public static bool IsSubsetSumDyn(int[] set, int n, int sum)
         {
