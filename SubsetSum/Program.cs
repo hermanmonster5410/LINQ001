@@ -58,7 +58,7 @@ namespace SubsetSum
                     }
                 }
 
-                if (IsSubsetSum(w, s0) == true)     // <== breakpoint
+                if (IsSubsetSumMyNaive(w, s0) == true)     // <== breakpoint
                     return true;
             }
 
