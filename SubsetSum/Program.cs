@@ -10,22 +10,21 @@ namespace SubsetSum
 {
     class Program
     {
-        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16, 4, 8, 31, 40, 32, 7, 2, 9, 38, 33, 17 };
+        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16, 4, 8, 31, 40, 32, 7, 2, 9, 38, 33, 17, 102, 45 };
 
         static void Main(string[] args)
         {
             Stopwatch stpWt = new Stopwatch();
 
             stpWt.Start();
-            Console.WriteLine("Naive: " + IsSubsetSumMyNaive(m, 90));
+            Console.WriteLine("Naive: " + IsSubsetSumMyNaive(m, 89));
             stpWt.Stop();
-            Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}" );
+            Console.WriteLine($"Elapsed:   {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}" );
 
             stpWt.Start();
-            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 90));
+            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 89));
             stpWt.Stop();
-            Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}");
-
+            Console.WriteLine($"Elapsed:   {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}");
 
             Console.WriteLine("Done");
         }
