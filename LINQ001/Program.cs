@@ -231,12 +231,12 @@ public class Program
 
         public virtual void Display()
         {
-            Console.WriteLine(" Asset: name=" + name);
+            Console.WriteLine("Method Display; Asset: name=" + name);
         }
 
         public virtual void NameLen()
         {
-            Console.WriteLine("Asset: name length=" + this.name.Length);
+            Console.WriteLine("Method NameLen; Asset: name length=" + this.name.Length);
         }
 
     }
@@ -265,12 +265,12 @@ public class Program
 
         public override void Display()
         {
-            Console.WriteLine("Stock (ovr): name=" + Name + "   price=" + price);
+            Console.WriteLine("Method Display; Stock (ovr): name=" + Name + "   price=" + price);
         }
 
         public new void NameLen()
         {
-            Console.WriteLine("Stock (new): name length= " + Name.Length);
+            Console.WriteLine("Method NameLen; Stock (new): name=" + Name + "   length= " + Name.Length);
         }
     }
 

@@ -10,22 +10,21 @@ namespace SubsetSum
 {
     class Program
     {
-        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16, 4, 8, 31, 40, 32, 7, 2, 9, 38, 33, 17 };
+        static int[] m = new int[] { 1, 5, 7, 10, 20, 12, 16, 4, 8 };
 
         static void Main(string[] args)
         {
             Stopwatch stpWt = new Stopwatch();
-
             stpWt.Start();
-            Console.WriteLine("Naive: " + IsSubsetSum(m, 51));
+            Console.WriteLine("Naive: " + IsSubsetSum(m, 300));
             stpWt.Stop();
-            Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}" );
+            Console.WriteLine($"Elapsed ms:   {stpWt.ElapsedMilliseconds}" );
 
-            stpWt.Start();
-            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 90));
-            stpWt.Stop();
-            Console.WriteLine($"Elapsed:  + {stpWt.ElapsedMilliseconds,16:N6}   {stpWt.Elapsed}");
-
+            Stopwatch stpWt2 = new Stopwatch();
+            stpWt2.Start();
+            Console.WriteLine("Dynam: " + IsSubsetSumDyn(m, m.Length, 300));
+            stpWt2.Stop();
+            Console.WriteLine($"Elapsed ms:   {stpWt2.ElapsedMilliseconds}");
 
             Console.WriteLine("Done");
         }
@@ -33,38 +32,36 @@ namespace SubsetSum
 
         public static bool IsSubsetSum(int[] ar, int s)
         {
-            int[] ar0 = ar.Where(a => a != s).ToArray();
-            if (ar0.Length != ar.Length)                   // <== breakpoint
+            if (ar.Any(x => x == s))
                 return true;
 
-            if (ar.Length < 2)
+            if (ar.Length == 1)
                 return false;
 
-            if ( (ar0.Length == 2) && (ar0[0] + ar0[1] == s) )
-                return true;
+            if (ar.Length == 2)
+                return (ar[0] + ar[1] == s);
 
-            for ( int i = 0; i < ar0.Length; i++ )
+            int[] w = new int[ar.Length - 1];
+
+            for ( int i = 0; i < ar.Length; i++ )
             {
-                int[] w = new int[ar0.Length - 1];
                 int cur = 0;
-                int s0 = 0;
-                for ( int j = 0; j < ar0.Length; j++)
+                int s0 = s - ar[i];
+                for ( int j = 0; j < ar.Length; j++)
                 {
-                    if (j == i)
-                        s0 = s - ar0[j];
-                    else
-                    {
-                        w[cur++] = ar0[j];
-                    }
+                    if (i != j)
+                        w[cur++] = ar[j];
                 }
 
-                if (IsSubsetSum(w, s0) == true)     // <== breakpoint
+                if (IsSubsetSum(w, s0) == true) 
                     return true;
             }
 
             return false;
         }
 
+
+//  https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
 
         public static bool IsSubsetSumDyn(int[] set, int n, int sum)
         {
