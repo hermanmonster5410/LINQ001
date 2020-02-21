@@ -35,7 +35,6 @@ public class Program
 
         var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8};
 
-
         var grpInt = lstInt.GroupBy(x => x);
 
         var grpInt2 = grpInt.Select(x => new { value = x.Key, count = x.Count() }).OrderByDescending(x => x.count).ThenByDescending(x => x.value);
@@ -83,13 +82,12 @@ public class Program
 
         RemoveStuff(lstStr1);
 
-
         string[] s1;
         int[]    i1;
 
         Console.WriteLine("Hello World");
-        print(uniqueInOrder(s1 = new string[] { "A", "A", "A", "A", "B", "B", "B", "C", "C", "D", "A", "A", "B", "B", "B" }));
-        print(uniqueInOrder(i1 = new int[]    { 1, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 6, 6, 6, 7, 8, 9, 10, 10, 10, 11 }));
+        Print(UniqueInOrder(s1 = new string[] { "A", "A", "A", "A", "B", "B", "B", "C", "C", "D", "A", "A", "B", "B", "B" }));
+        Print(UniqueInOrder(i1 = new int[]    { 1, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 6, 6, 6, 7, 8, 9, 10, 10, 10, 11 }));
 
         var v1 = s1.ToLookup(p => p);
 
@@ -122,14 +120,14 @@ public class Program
 
         int[] s = new int[] { 10, 21, 2, 45, 29, 65, 19, 27, 63, 78, 24 };
         int[] r = s.Where(x => (x >= 20 && x <= 29)).OrderBy(t => t).ToArray();
-        print(r);
+        Print(r);
 
         string[] names = { "Tom", "Dick", "Bon", "Harry", "Toy", "Gay", "Mary", "Jay" };
 
         IEnumerable<string> outerQuery = names.Where(n => n.Length == names.OrderBy(n2 => n2.Length).Select(n2 => n2.Length).First());
-        print(outerQuery.ToArray());
+        Print(outerQuery.ToArray());
         IEnumerable<string> outerQuery1 = names.Where(n => n.Length == names.OrderBy(n2 => n2.Length).First().Length);
-        print(outerQuery1.ToArray());
+        Print(outerQuery1.ToArray());
 
         List<Product> lstPrd = new List<Product>
         {
@@ -183,12 +181,12 @@ public class Program
     }
 
 
-    public static T[] uniqueInOrder<T>(T[] a)
+    public static T[] UniqueInOrder<T>(T[] a)
     {
         return a.Where((x, y) => !x.Equals(y)).ToArray<T>();
     }
 
-    public static void print<T>(T[] p)
+    public static void Print<T>(T[] p)
     {
         foreach (T z in p)
             Console.Write(z.ToString() + ", ");
