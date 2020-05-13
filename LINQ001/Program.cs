@@ -7,6 +7,23 @@ public class Program
 {
     public static void Main()
     {
+
+        Sentence xx = new Sentence();
+
+        IEnumerable<Asset> zz = xx.GetItems<Asset>(47.0);
+
+
+
+        //       Array.Copy()
+
+        string phrase = "To be or not to be? This is the question. Wether 'tis nobler in the mind to suffer the slings and arrows of outrageous fortune or to take arms against the sea of troubles and by opposing end them? To die, to sleep? And by the sleep we say we end the thousand of natural shocks that flesh is ear to";
+
+        var fff = phrase.ToUpper().ToCharArray().GroupBy(x => x).Select(x => new { value = x.Key, count = x.Count() }).OrderByDescending(x => x.count);
+
+        foreach (var item in fff)
+            Console.WriteLine(item.value + "  " + item.count);
+
+
         //  Problem #1: Hiders vs Overriders
 
         Stock st1 = new Stock("General Electric", 135.00m);
@@ -198,7 +215,6 @@ public class Program
     {
 //        string[] s = lst.ToArray();
         lst.RemoveAll(x => x.ToUpper().Contains("STUFF"));
-
     }
 
 
@@ -219,6 +235,8 @@ public class Program
             get { return name; }
             set { name = value; }
         }
+
+        public double PriceA { get; set; }
 
         public Asset()  { }
 
@@ -277,7 +295,22 @@ public class Program
         string text;
         string[] words;
 
-        public Sentence() { }
+        public List<Asset> _myAssets;
+        public IEnumerable<Asset> _inventory;
+
+        public Sentence() 
+        {
+            _myAssets = new List<Asset>();
+            _myAssets.Add(new Asset { Name = "One",     PriceA = 35.6 });
+            _myAssets.Add(new Asset { Name = "Two",     PriceA = 80.1 });
+            _myAssets.Add(new Asset { Name = "Three",   PriceA = 02.4 });
+            _myAssets.Add(new Asset { Name = "Four",    PriceA = 43.2 });
+            _myAssets.Add(new Asset { Name = "Five",    PriceA = 30.9 });
+            _myAssets.Add(new Asset { Name = "Six",     PriceA = 28.7 });
+            _myAssets.Add(new Asset { Name = "Seven",   PriceA = 64.1 });
+
+            _inventory = _myAssets as IEnumerable<Asset>;
+        }
 
         public Sentence(string s)
         {
@@ -293,6 +326,16 @@ public class Program
 
         public int Length
         {  get { return words.Length; } }
+
+
+ 
+        public IEnumerable<T> GetItems<T>(double minPrice)
+        {
+            lock (this)
+            {
+                return (IEnumerable<T>) _inventory.Where(item => item.PriceA >= minPrice);
+            }
+        }
     }
 
 }
