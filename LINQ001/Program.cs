@@ -310,7 +310,6 @@ public class Program
     {
 //        string[] s = lst.ToArray();
         lst.RemoveAll(x => x.ToUpper().Contains("STUFF"));
-
     }
 
 
@@ -331,6 +330,8 @@ public class Program
             get { return name; }
             set { name = value; }
         }
+
+        public double PriceA { get; set; }
 
         public Asset()  { }
 
@@ -389,7 +390,22 @@ public class Program
         string text;
         string[] words;
 
-        public Sentence() { }
+        public List<Asset> _myAssets;
+        public IEnumerable<Asset> _inventory;
+
+        public Sentence() 
+        {
+            _myAssets = new List<Asset>();
+            _myAssets.Add(new Asset { Name = "One",     PriceA = 35.6 });
+            _myAssets.Add(new Asset { Name = "Two",     PriceA = 80.1 });
+            _myAssets.Add(new Asset { Name = "Three",   PriceA = 02.4 });
+            _myAssets.Add(new Asset { Name = "Four",    PriceA = 43.2 });
+            _myAssets.Add(new Asset { Name = "Five",    PriceA = 30.9 });
+            _myAssets.Add(new Asset { Name = "Six",     PriceA = 28.7 });
+            _myAssets.Add(new Asset { Name = "Seven",   PriceA = 64.1 });
+
+            _inventory = _myAssets as IEnumerable<Asset>;
+        }
 
         public Sentence(string s)
         {
@@ -405,6 +421,16 @@ public class Program
 
         public int Length
         {  get { return words.Length; } }
+
+
+ 
+        public IEnumerable<T> GetItems<T>(double minPrice)
+        {
+            lock (this)
+            {
+                return (IEnumerable<T>) _inventory.Where(item => item.PriceA >= minPrice);
+            }
+        }
     }
 
     public class MyGeneric1<T> where T : class
