@@ -2,11 +2,57 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class Program
 {
-    public static void Main()
+    public static async Task Main()
     {
+
+        int[] arTest1 = { 23, -8, 68, 12, 901, -86, 45, 78, 1, 3, -9, 0, 34 };
+        int[] arTest2 = { 224, 401 };
+        int[] arTest3 = { 549 };
+        int[] arTest4 = { };
+
+        int ret;
+/*
+        ret = maxArray(arTest1);
+        ret = maxArray(arTest2);
+        ret = maxArray(arTest3);
+        ret = maxArray(arTest4);
+        ret = maxArray(null);
+*/
+        Task<int> task = Task.Run(() => { int smx = 0; for (int i = 1; i <= 100000; i++) smx += i; return smx; });
+        Console.WriteLine("Task Running...");
+        Console.WriteLine("The answer is " + task.Result);
+
+        var pnum1 = CountPrimes1Async(           1,      300_000_000);
+        var pnum2 = CountPrimes2Async(  300_000_001,     600_000_000);
+        var pnum3 = CountPrimes3Async(  600_000_001,     900_000_000);
+
+        var lstTasks = new List<Task<int>> { pnum1, pnum2, pnum3 };
+
+        while (lstTasks.Count > 0)
+        {
+            Task<int> finishedTask = await Task.WhenAny(lstTasks);
+            if (finishedTask == pnum1)
+            {
+                Console.WriteLine("CountPrimes1 = " + pnum1.Result);
+            }
+            else if (finishedTask == pnum2)
+            {
+                Console.WriteLine("CountPrimes2 = " + finishedTask.Result);
+            }
+            else if (finishedTask == pnum3)
+            {
+                Console.WriteLine("CountPrimes3 = " + finishedTask.Result);
+            }
+            lstTasks.Remove(finishedTask);
+        }
+
+        Console.WriteLine("Async operations done");
+
+
         //  Problem #1: Hiders vs Overriders
 
         Stock st1 = new Stock("General Electric", 135.00m);
@@ -67,6 +113,17 @@ public class Program
 
         Console.WriteLine("Good pair of socks: " + sum);
 
+        foreach (var item in dict01)
+        {
+            Console.WriteLine("Key=" + item.Key + "   Value=" + item.Value);
+        }
+
+        int ggg = dict01[5];
+
+        foreach (var item in dict01.Keys)
+            Console.WriteLine("k=" + item + "   v=" + dict01[item]);
+
+   
         string str02 = "hsgdfjgkh";
         char[] route = str02.ToCharArray();
 //      char prev = 'X';
@@ -176,10 +233,65 @@ public class Program
         Console.WriteLine("Hello, {0}! Today is {1}, it's {2:HH:mm} now.", name, date.DayOfWeek, date);
         // String interpolation:
         Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
-
-
     }
 
+
+
+    public static async Task<int> CountPrimes1Async(int n1, int n2)
+    {
+        int retVal;
+
+//      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        retVal = await GetPcAsync(n1, n2);
+
+        return retVal;
+    }
+
+    public static async Task<int> CountPrimes2Async(int n1, int n2)
+    {
+        int retVal;
+
+//      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        retVal = await GetPcAsync(n1, n2);
+
+        return retVal;
+    }
+
+    public static async Task<int> CountPrimes3Async(int n1, int n2)
+    {
+        int retVal;
+
+//      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        retVal = await GetPcAsync(n1, n2);
+
+        return retVal;
+    }
+
+    public static Task<int> GetPcAsync(int n1, int n2)
+    {
+        return Task.Run(() => ParallelEnumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0))));
+    }
+
+
+
+    public static int maxArray(int[] pArr)
+    {
+        if (pArr == null)
+            throw new ArgumentNullException();
+
+        if (pArr.Length == 0)
+            throw new Exception("Parameter array has no elements");
+
+        if (pArr.Length == 1)
+            return pArr[0];
+
+        int retMax = pArr[0];
+        for (int i = 1; i < pArr.Length; i++)
+            if (pArr[i] > retMax)
+                retMax = pArr[i];
+
+        return retMax;
+    }
 
     public static T[] UniqueInOrder<T>(T[] a)
     {
@@ -293,6 +405,17 @@ public class Program
 
         public int Length
         {  get { return words.Length; } }
+    }
+
+    public class MyGeneric1<T> where T : class
+    {
+        IList ww1 = new ArrayList();
+        ArrayList ww2 = new ArrayList();
+    }
+
+    public class MyGeneric2<T> where T : Hashtable
+    {
+
     }
 
 }
