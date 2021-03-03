@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 public class Program
 {
@@ -15,20 +16,40 @@ public class Program
         int[] arTest4 = { };
 
         int ret;
-/*
-        ret = maxArray(arTest1);
-        ret = maxArray(arTest2);
-        ret = maxArray(arTest3);
-        ret = maxArray(arTest4);
-        ret = maxArray(null);
-*/
+        /*
+                ret = maxArray(arTest1);
+                ret = maxArray(arTest2);
+                ret = maxArray(arTest3);
+                ret = maxArray(arTest4);
+                ret = maxArray(null);
+        */
+
         Task<int> task = Task.Run(() => { int smx = 0; for (int i = 1; i <= 100000; i++) smx += i; return smx; });
         Console.WriteLine("Task Running...");
         Console.WriteLine("The answer is " + task.Result);
 
-        var pnum1 = CountPrimes1Async(           1,      300_000_000);
-        var pnum2 = CountPrimes2Async(  300_000_001,     600_000_000);
-        var pnum3 = CountPrimes3Async(  600_000_001,     900_000_000);
+        Console.WriteLine("Running consequently...");
+        Stopwatch sw1 = new Stopwatch();
+        sw1.Start();
+
+        int cntPrm = Enumerable.Range(2, 3_000_000).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        Console.WriteLine("Cnt1 = " + cntPrm);
+
+        cntPrm = Enumerable.Range(3_000_001, 6_000_000).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        Console.WriteLine("Cnt2 = " + cntPrm);
+
+        cntPrm = Enumerable.Range(6_000_001, 9_000_000).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        Console.WriteLine("Cnt3 = " + cntPrm);
+        sw1.Stop();
+        Console.WriteLine("Elapsed A = " + sw1.ElapsedMilliseconds);
+
+        sw1 = new Stopwatch();
+        Console.WriteLine("Running in parallel...");
+        sw1.Start();
+
+        var pnum1 = CountPrimes1Async(1, 3_000_000);
+        var pnum2 = CountPrimes2Async(3_000_001, 6_000_000);
+        var pnum3 = CountPrimes3Async(6_000_001, 9_000_000);
 
         var lstTasks = new List<Task<int>> { pnum1, pnum2, pnum3 };
 
@@ -50,14 +71,17 @@ public class Program
             lstTasks.Remove(finishedTask);
         }
 
-        Console.WriteLine("Async operations done");
+        sw1.Stop();
+
+        Console.WriteLine("Async operations done.\nElapsed B = " + sw1.ElapsedMilliseconds);
+        Console.ReadLine();
 
 
         //  Problem #1: Hiders vs Overriders
 
         Stock st1 = new Stock("General Electric", 135.00m);
         Asset as1 = st1;
-        Stock st2 = (Stock) as1;
+        Stock st2 = (Stock)as1;
 
         as1.Display();
         as1.NameLen();
@@ -79,7 +103,7 @@ public class Program
 
         // Problem #2.
 
-        var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8};
+        var lstInt = new List<int> { 23, 7, 4, 5, 90, 27, 5, 7, 5, 1, 5, 8, 10, 8, 6, 8, 11, 8 };
 
         var grpInt = lstInt.GroupBy(x => x);
 
@@ -94,9 +118,9 @@ public class Program
 
         Dictionary<int, int> dict01 = new Dictionary<int, int>();
         int curVal;
-        for (int n=0; n<socks.Length; n++ )
+        for (int n = 0; n < socks.Length; n++)
         {
-            if ( !dict01.ContainsKey(socks[n]) )
+            if (!dict01.ContainsKey(socks[n]))
             {
                 dict01.Add(socks[n], 1);
             }
@@ -123,36 +147,36 @@ public class Program
         foreach (var item in dict01.Keys)
             Console.WriteLine("k=" + item + "   v=" + dict01[item]);
 
-   
+
         string str02 = "hsgdfjgkh";
         char[] route = str02.ToCharArray();
-//      char prev = 'X';
-        
+        //      char prev = 'X';
+
         foreach (char cval in route)
         {
 
         }
 
-// Problem # 3. 
+        // Problem # 3. 
 
         List<string> lstStr1 = new List<string> { "Henry", "debate", "night", "nonstuff", "trident", "moon", "mySTUFF", "StUfF" };
 
         RemoveStuff(lstStr1);
 
         string[] s1;
-        int[]    i1;
+        int[] i1;
 
         Console.WriteLine("Hello World");
         Print(UniqueInOrder(s1 = new string[] { "A", "A", "A", "A", "B", "B", "B", "C", "C", "D", "A", "A", "B", "B", "B" }));
-        Print(UniqueInOrder(i1 = new int[]    { 1, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 6, 6, 6, 7, 8, 9, 10, 10, 10, 11 }));
+        Print(UniqueInOrder(i1 = new int[] { 1, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 6, 6, 6, 7, 8, 9, 10, 10, 10, 11 }));
 
         var v1 = s1.ToLookup(p => p);
 
-        foreach ( var grp in v1 )
+        foreach (var grp in v1)
         {
             Console.WriteLine("Key: " + grp.Key + "   # of entries: " + grp.Count());
 
-            foreach ( var elem in grp )
+            foreach (var elem in grp)
             {
                 Console.WriteLine(elem);
             }
@@ -210,16 +234,16 @@ public class Program
 
         var grp1 = lstPrd.ToLookup(p => p.Category);
         var grp2 = lstPrd.ToLookup(p => p.Category, p => p.Name);
-        var grp3 = lstPrd.ToLookup(p => p.Category, p => new { p.Name, p.Price});
+        var grp3 = lstPrd.ToLookup(p => p.Category, p => new { p.Name, p.Price });
 
         var grp4 = lstPrd.Where(p => p.Category != "Kitcheware").Select(p => new { p.Name, p.Price, p.Category }).GroupBy(p => p.Category);
 
-        foreach ( var g in grp4 )
+        foreach (var g in grp4)
         {
             Console.WriteLine("Key: " + g.Key + "  Count: " + g.Count());
-            foreach ( var t in g )
+            foreach (var t in g)
             {
-//              Console.WriteLine("Name: " + t.Name + "    Price: " + t.Price);
+                //              Console.WriteLine("Name: " + t.Name + "    Price: " + t.Price);
                 Console.WriteLine($"Name:  {t.Name,-30}   Price:  {t.Price,8:N4}");
             }
             Console.WriteLine();
@@ -241,7 +265,7 @@ public class Program
     {
         int retVal;
 
-//      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        //      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
         retVal = await GetPcAsync(n1, n2);
 
         return retVal;
@@ -251,7 +275,7 @@ public class Program
     {
         int retVal;
 
-//      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        //      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
         retVal = await GetPcAsync(n1, n2);
 
         return retVal;
@@ -261,7 +285,7 @@ public class Program
     {
         int retVal;
 
-//      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
+        //      retVal = await Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0)));
         retVal = await GetPcAsync(n1, n2);
 
         return retVal;
@@ -269,7 +293,8 @@ public class Program
 
     public static Task<int> GetPcAsync(int n1, int n2)
     {
-        return Task.Run(() => ParallelEnumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0))));
+        Task<int> xx = Task<int>.Run(() => Enumerable.Range(n1, n2).Count((n => Enumerable.Range(2, (int)Math.Sqrt(n) - 1).All(x => n % x > 0))));
+        return xx;
     }
 
 
@@ -308,8 +333,9 @@ public class Program
 
     public static void RemoveStuff(List<string> lst)
     {
-//        string[] s = lst.ToArray();
+        //        string[] s = lst.ToArray();
         lst.RemoveAll(x => x.ToUpper().Contains("STUFF"));
+
     }
 
 
@@ -331,11 +357,9 @@ public class Program
             set { name = value; }
         }
 
-        public double PriceA { get; set; }
+        public Asset() { }
 
-        public Asset()  { }
-
-        public Asset (string name)
+        public Asset(string name)
         {
             this.name = name;
         }
@@ -352,7 +376,7 @@ public class Program
 
     }
 
-    public class Stock  : Asset
+    public class Stock : Asset
     {
         private decimal price;
 
@@ -390,22 +414,7 @@ public class Program
         string text;
         string[] words;
 
-        public List<Asset> _myAssets;
-        public IEnumerable<Asset> _inventory;
-
-        public Sentence() 
-        {
-            _myAssets = new List<Asset>();
-            _myAssets.Add(new Asset { Name = "One",     PriceA = 35.6 });
-            _myAssets.Add(new Asset { Name = "Two",     PriceA = 80.1 });
-            _myAssets.Add(new Asset { Name = "Three",   PriceA = 02.4 });
-            _myAssets.Add(new Asset { Name = "Four",    PriceA = 43.2 });
-            _myAssets.Add(new Asset { Name = "Five",    PriceA = 30.9 });
-            _myAssets.Add(new Asset { Name = "Six",     PriceA = 28.7 });
-            _myAssets.Add(new Asset { Name = "Seven",   PriceA = 64.1 });
-
-            _inventory = _myAssets as IEnumerable<Asset>;
-        }
+        public Sentence() { }
 
         public Sentence(string s)
         {
@@ -413,24 +422,14 @@ public class Program
             text = s;
         }
 
-        public string this [int wn]
+        public string this[int wn]
         {
-            get {return words[wn]; }
+            get { return words[wn]; }
             set { words[wn] = value; }
         }
 
         public int Length
-        {  get { return words.Length; } }
-
-
- 
-        public IEnumerable<T> GetItems<T>(double minPrice)
-        {
-            lock (this)
-            {
-                return (IEnumerable<T>) _inventory.Where(item => item.PriceA >= minPrice);
-            }
-        }
+        { get { return words.Length; } }
     }
 
     public class MyGeneric1<T> where T : class
