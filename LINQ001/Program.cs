@@ -112,6 +112,14 @@ public class Program
         foreach (var m in grpInt2)
             Console.WriteLine(m.value + "   " + m.count);
 
+        foreach (var item in grpInt)
+        {
+            var mm = item;
+            Console.WriteLine("Key=" + item.Key + "   " + item.Count());
+            foreach (var n in mm)
+                Console.WriteLine("  item=" + n);
+        }
+
         int[] socks = { 1, 1, 3, 1, 2, 1, 3, 3, 3, 3 };
 
         int sq = socks.GroupBy(x => x).Select(x => new { key = x.Key, value = x.Count() }).Sum(x => x.value / 2);
