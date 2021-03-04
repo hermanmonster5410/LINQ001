@@ -120,6 +120,17 @@ public class Program
                 Console.WriteLine("  item=" + n);
         }
 
+        //   Problem #3:
+        List<string> lstStr101 = new List<string>() { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
+
+        List<string> lstStr102 = new List<string>();
+        lstStr102.AddRange(lstStr101.Skip(1).Take(4));
+
+        List<string> lstStr103 = lstStr102.Distinct().ToList();
+
+
+
+
         int[] socks = { 1, 1, 3, 1, 2, 1, 3, 3, 3, 3 };
 
         int sq = socks.GroupBy(x => x).Select(x => new { key = x.Key, value = x.Count() }).Sum(x => x.value / 2);
