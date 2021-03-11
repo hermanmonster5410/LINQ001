@@ -12,6 +12,8 @@ public class Program
     public static async Task Main()
     {
         Task tskHttp = TestHttpClientAsync();
+        await Task.Delay(10000);
+
 
         Func<int, int, string> trend = (a1, a2) => (a1 + a2).ToString();
 
@@ -82,9 +84,6 @@ public class Program
         {
             Console.WriteLine("Key=" + item + "   Value=" + www101[item]);
         }
-
-
-        await Task.Delay(10000);
 
 
 
