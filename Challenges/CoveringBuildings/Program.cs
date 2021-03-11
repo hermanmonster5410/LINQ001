@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace CoveringBuildings
@@ -11,6 +12,8 @@ namespace CoveringBuildings
             Console.WriteLine("Hello World!");
 
             long[] b = {21, 1, 30, 2, 45, 3, 4, 7, 9, 4, 7, 8, 33, 10};
+            List<long> lilo = b.OrderBy(x => x).ToList();
+
             long[] result;
 
             result = OptimalCover(b);

@@ -3,12 +3,15 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Diagnostics;
+using System.Net.Http;
 
 public class Program
 {
     public static async Task Main()
     {
+        Task tskHttp = TestHttpClientAsync();
 
         Func<int, int, string> trend = (a1, a2) => (a1 + a2).ToString();
 
@@ -81,6 +84,10 @@ public class Program
         }
 
 
+        await Task.Delay(10000);
+
+
+
         int[] arTest1 = { 23, -8, 68, 12, 901, -86, 45, 78, 1, 3, -9, 0, 34 };
         int[] arTest2 = { 224, 401 };
         int[] arTest3 = { 549 };
@@ -119,7 +126,7 @@ public class Program
         Console.WriteLine("Running in parallel...");
         sw1.Start();
 
-        var pnum1 = CountPrimes1Async(1, 3_000_000);
+        var pnum1 = CountPrimes1Async(2, 3_000_000);
         var pnum2 = CountPrimes2Async(3_000_001, 6_000_000);
         var pnum3 = CountPrimes3Async(6_000_001, 9_000_000);
 
@@ -247,6 +254,7 @@ public class Program
             Console.WriteLine("Key=" + item.Key + "   Value=" + item.Value);
         }
 
+//      int ggg = dict01[5];
 
         foreach (var item in dict01.Keys)
             Console.WriteLine("k=" + item + "   v=" + dict01[item]);
@@ -440,6 +448,27 @@ public class Program
         //        string[] s = lst.ToArray();
         lst.RemoveAll(x => x.ToUpper().Contains("STUFF"));
 
+    }
+
+    public static async Task TestHttpClientAsync()
+    {
+        var httpClient = new HttpClient();
+        var task1 = httpClient.GetStringAsync("http://www.linqpad.net");
+        var task2 = httpClient.GetStringAsync("http://www.oracle.com");
+
+        await task1;
+        await task2;
+
+        Console.WriteLine("Returned page lenth: " + task1.Result.Length + "\r\n\r\n" + task1.Result);
+
+        Console.WriteLine("\r\n\r\n\r\n==================================================================================");
+        Console.WriteLine("\r\n\r\n\r\n==================================================================================");
+
+//        await task2;
+        Console.WriteLine("Returned page lenth: " + task2.Result.Length + "\r\n\r\n" + task2.Result);
+
+        Console.WriteLine("\r\n\r\n\r\n==================================================================================");
+        Console.WriteLine("\r\n\r\n\r\n==================================================================================");
     }
 
 
