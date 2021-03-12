@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImmutableCollections", "Imm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCore001", "WebAppCore001\WebAppCore001.csproj", "{EF7688DA-B789-4822-A434-259FA5F39D9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppFrmwk001", "WebAppFrmwk001\WebAppFrmwk001.csproj", "{042F71A7-216F-4624-B289-992CFA2E8FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppFrmwk001.Tests", "WebAppFrmwk001.Tests\WebAppFrmwk001.Tests.csproj", "{87CEC543-AD42-4BDC-9ABD-4AE07037B0E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042F71A7-216F-4624-B289-992CFA2E8FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042F71A7-216F-4624-B289-992CFA2E8FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042F71A7-216F-4624-B289-992CFA2E8FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042F71A7-216F-4624-B289-992CFA2E8FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87CEC543-AD42-4BDC-9ABD-4AE07037B0E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87CEC543-AD42-4BDC-9ABD-4AE07037B0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87CEC543-AD42-4BDC-9ABD-4AE07037B0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87CEC543-AD42-4BDC-9ABD-4AE07037B0E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
