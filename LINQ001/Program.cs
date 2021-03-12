@@ -11,6 +11,31 @@ public class Program
 {
     public static async Task Main()
     {
+        Task tskHttp = TestHttpClientAsync();
+        await Task.Delay(10000);
+
+
+        Func<int, int, string> trend = (a1, a2) => (a1 + a2).ToString();
+
+        string ttt201 = trend(5, 9);
+
+        //      Reverse string
+
+        string ss101 = "Morocco";
+
+        char[] rev;
+        Array.Reverse(rev = ss101.ToCharArray());
+        string ss102 = new string(rev);
+
+        string gggg = new string (ss101.Reverse().ToArray());
+
+
+        // Items removal using LINQ:
+
+        List<string> str201 = new List<string> { "Yuriy", "Lena", "Corine", "John",   "Millie", "Kelly",  "Kellie" };
+        List<string> str202 = new List<string> { "Stella", "Emily", "table", "Kelly", "chair", "random", "Lena" };
+
+        str202.RemoveAll(a => str201.Exists(b => b == a)); //  a => !b1.Exists(b => a.number == b.number));
 
         List<string> lst321 = new List<string> { "Delta", "Mango", "Decimal", "Prego", "Sturgeon", "Band", "Mango", "Delta", "Flag", "Roster", "Decimal", "Skip", "Delta", "Band" };
 
@@ -19,10 +44,55 @@ public class Program
         Console.WriteLine("Counter=" + set321.Count);
         foreach (var item in set321)
             Console.WriteLine(item);
+        /*
+                IList<Student> studentList = new List<Student>() {
+                                    new Student() { StudentID = 1, StudentName = "John", Age = 18, StandardID = 1 } ,
+                                    new Student() { StudentID = 2, StudentName = "Steve",  Age = 21, StandardID = 1 } ,
+                                    new Student() { StudentID = 3, StudentName = "Bill",  Age = 18, StandardID = 2 } ,
+                                    new Student() { StudentID = 4, StudentName = "Ram" , Age = 20, StandardID = 2 } ,
+                                    new Student() { StudentID = 5, StudentName = "Ron" , Age = 21 }
+        };
+
+                IList<Standard> standardList = new List<Standard>() {
+                                    new Standard(){ StandardID = 1, StandardName="Standard 1"},
+                                    new Standard(){ StandardID = 2, StandardName="Standard 2"},
+                                    new Standard(){ StandardID = 3, StandardName="Standard 3"}
+                                 };
+
+        */
+
+        List<string> str203 = str201.Where(x => !x.ToUpper().StartsWith("K")).Select( x => x + "   " + x).ToList();
+
+        Type ttt = typeof(List<string>);
+        Type ttt2 = str203.GetType();
+
+        if ( ttt == ttt2 )
+        {
+            Console.WriteLine("List<string>");
+        }
+
+        Dictionary<long, string> www101 = new Dictionary<long, string>()
+        {
+            {202, "Valley"},
+            {210, "Money"},
+            {30, "Penny" },
+            {21, "Sally" },
+            {501, "Derek" }
+        };
+
+        string tmp901;
+        www101.TryGetValue(202, out tmp901);
+        www101.TryGetValue(11, out tmp901);
+
+        www101.Remove(21);
+        www101.Remove(22);
+
+        foreach (var item in www101.Keys.OrderBy(x => x))
+        {
+            Console.WriteLine("Key=" + item + "   Value=" + www101[item]);
+        }
 
 
-        Task tskHttp = TestHttpClientAsync();
-        await Task.Delay(10000);
 
         int[] arTest1 = { 23, -8, 68, 12, 901, -86, 45, 78, 1, 3, -9, 0, 34 };
         int[] arTest2 = { 224, 401 };
@@ -38,6 +108,7 @@ public class Program
                 ret = maxArray(null);
         */
 
+/*
         Task<int> task = Task.Run(() => { int smx = 0; for (int i = 1; i <= 100000; i++) smx += i; return smx; });
         Console.WriteLine("Task Running...");
         Console.WriteLine("The answer is " + task.Result);
@@ -90,12 +161,24 @@ public class Program
         Console.WriteLine("Async operations done.\nElapsed B = " + sw1.ElapsedMilliseconds);
         Console.ReadLine();
 
-
+*/
         //  Problem #1: Hiders vs Overriders
 
         Stock st1 = new Stock("General Electric", 135.00m);
         Asset as1 = st1;
         Stock st2 = (Stock)as1;
+
+        bool testIs;
+
+        testIs = (st1 is Asset);
+        testIs = (st1 is Stock);
+
+        testIs = (as1 is Asset);
+        testIs = (as1 is Stock);
+
+        testIs = (st2 is Asset);
+        testIs = (st2 is Stock);
+
 
         as1.Display();
         as1.NameLen();
@@ -140,9 +223,11 @@ public class Program
         List<string> lstStr102 = new List<string>();
         lstStr102.AddRange(lstStr101.Skip(1).Take(4));
 
-        List<string> lstStr103 = lstStr102.Distinct().ToList();
+        lstStr101.AddRange(lstStr102);
+            
+        List<string> lstStr103 = lstStr101.Distinct().ToList();
 
-
+        lstStr102.ForEach(x => x.ToUpper());
 
 
         int[] socks = { 1, 1, 3, 1, 2, 1, 3, 3, 3, 3 };
@@ -190,7 +275,7 @@ public class Program
 
         }
 
-        // Problem # 3. 
+        // Problem # 4. 
 
         List<string> lstStr1 = new List<string> { "Henry", "debate", "night", "nonstuff", "trident", "moon", "mySTUFF", "StUfF" };
 
