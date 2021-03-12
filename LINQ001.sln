@@ -15,9 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializers", "Serializers\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharTabulator", "CharTabulator\CharTabulator.csproj", "{D8205AC1-08C1-441E-A64D-BFF765F6D007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoveringBuildings", "Challenges\CoveringBuildings\CoveringBuildings.csproj", "{7B59A34E-8442-4FD3-9642-C9F2B7A8BAC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoveringBuildings", "Challenges\CoveringBuildings\CoveringBuildings.csproj", "{7B59A34E-8442-4FD3-9642-C9F2B7A8BAC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImmutableCollections", "ImmutableCollections\ImmutableCollections.csproj", "{83729637-1864-4832-BCD9-6E7D56F05A7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImmutableCollections", "ImmutableCollections\ImmutableCollections.csproj", "{83729637-1864-4832-BCD9-6E7D56F05A7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppCore001", "WebAppCore001\WebAppCore001.csproj", "{EF7688DA-B789-4822-A434-259FA5F39D9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{83729637-1864-4832-BCD9-6E7D56F05A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83729637-1864-4832-BCD9-6E7D56F05A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83729637-1864-4832-BCD9-6E7D56F05A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7688DA-B789-4822-A434-259FA5F39D9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

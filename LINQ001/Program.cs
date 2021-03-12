@@ -11,11 +11,18 @@ public class Program
 {
     public static async Task Main()
     {
+
+        List<string> lst321 = new List<string> { "Delta", "Mango", "Decimal", "Prego", "Sturgeon", "Band", "Mango", "Delta", "Flag", "Roster", "Decimal", "Skip", "Delta", "Band" };
+
+        HashSet<string> set321 = new HashSet<string>(lst321);
+
+        Console.WriteLine("Counter=" + set321.Count);
+        foreach (var item in set321)
+            Console.WriteLine(item);
+
+
         Task tskHttp = TestHttpClientAsync();
-
         await Task.Delay(10000);
-
-
 
         int[] arTest1 = { 23, -8, 68, 12, 901, -86, 45, 78, 1, 3, -9, 0, 34 };
         int[] arTest2 = { 224, 401 };
