@@ -7,10 +7,44 @@ using System.Threading;
 using System.Diagnostics;
 using System.Net.Http;
 
+public class MyClassA
+{
+    public MyClassA()
+    {
+        Console.WriteLine("Constructor A");
+    }
+
+    public void abc()
+    {
+        Console.WriteLine("A");
+    }
+}
+
+public class MyClassB   : MyClassA
+{
+    public MyClassB()
+    {
+        Console.WriteLine("Constructor B");
+    }
+
+    public void abc()
+    {
+        Console.WriteLine("B");
+    }
+}
+
+
+
 public class Program
 {
     public static async Task Main()
     {
+        MyClassB vrb = new MyClassB();
+        MyClassB vra = vrb;
+        vra.abc();
+
+
+
         Task tskHttp = TestHttpClientAsync();
         await Task.Delay(10000);
 
